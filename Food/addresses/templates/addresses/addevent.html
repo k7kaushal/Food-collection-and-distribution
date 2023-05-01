@@ -1,0 +1,36 @@
+{% extends 'addresses/base.html' %}
+{% load static %}
+{% block content %}
+{% include 'addresses/messages.html' %}
+<div class="container">
+    <div class="content-section">
+        <form action="/addevent/" method="post">
+            {% csrf_token %}
+            <fieldset class="form-group">
+            <div class="Text-heading">Register your event</div>             
+            <div class="mb-3">
+                <label class="form-label">Event Name</label>
+                <input type="text" class="form-control" name="event_name">
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Number of attendees</label>
+                <input type="text" class="form-control" name="event_attendants" placeholder="eg : 100+, 1000+ etc">
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Location</label>
+                <input type="text" class="form-control" name="location" >
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Contact</label>
+                <input type="text" class="form-control" name="contact" >
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Are you the Event Manager?  &nbsp;</label>
+                <input type="checkbox" class="" name="event_manager" >
+            </div>
+            </fieldset>
+              <button type="submit" class="btn btn-primary">Make your Event live on map!</button>
+            </form>
+    </div>   
+</div>
+{% endblock %}

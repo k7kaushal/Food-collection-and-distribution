@@ -1,0 +1,32 @@
+{% extends 'addresses/base.html' %}
+{% load static %}
+{% block content %}
+{% include 'addresses/messages.html' %}
+<div class="container">
+    <div class="content-section">
+        <form action="/addngo/" method="post">
+            {% csrf_token %}
+            <fieldset class="form-group">
+            <div class="Text-heading">Add your NGO</div>             
+            <div class="mb-3">
+                <label class="form-label">NGO Name</label>
+                <input type="text" class="form-control" name="ngo_name">
+            </div>
+            <div class="mb-3">
+                <label class="form-label">NGO type</label>
+                <input type="text" class="form-control" name="ngo_type" placeholder="eg : Food, Clothes, education, etc">
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Location</label>
+                <input type="text" class="form-control" name="location" >
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Contact</label>
+                <input type="text" class="form-control" name="contact" >
+            </div>
+            </fieldset>
+              <button type="submit" class="btn btn-primary">Make your NGO live on map!</button>
+            </form>
+    </div>   
+</div>
+{% endblock %}
