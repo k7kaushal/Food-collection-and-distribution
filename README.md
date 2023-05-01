@@ -8,8 +8,8 @@ This community service project aims to address food scarcity in the local commun
 Volunteers will then sort and package the food before distributing it to those in need through partnerships with local food banks, shelters, and community centers. 
 
 # Key features
-Live event tracking.
-Events are removed by the user after requirement is satisfied or removed automatically if is not responded within 2 days to avoid unnecessary piling up of requests.
-Connect with pre-registered welfare organisations.
-Efficient distribution for food resources.
-Better outreach for NGOs.
+1. Live event tracking.
+2. Events are removed by the user after requirement is satisfied or removed automatically if is not responded within 2 days to avoid unnecessary piling up of requests.
+3. Connect with pre-registered welfare organisations.
+4. Efficient distribution for food resources.
+5. Better outreach for NGOs.
