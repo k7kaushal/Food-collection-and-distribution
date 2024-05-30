@@ -1,0 +1,50 @@
+{% extends 'addresses/base.html' %}
+{% load static %}
+{% block content %}
+{% include 'addresses/messages.html' %}
+<div class="container">
+    <div 
+    style="border: 2px solid gold; background-color:rgba(163, 194, 117, 0.2); border-radius: 25px; padding: 20px; margin-bottom: 20px; margin-top: 20px;"
+    >
+    <h3 style="color: rgba(73, 117, 6, 0.8); text-align: center;">Own a Restaurant?</h3><br>
+    <h4 style="color: rgba(73, 117, 6, 0.8);"><i class="fa-solid fa-handshake"></i>&nbsp;Make your restaurant visible to nearby NGOs</h4>
+    <ul>
+        <li>Fill in restaurant details.</li>
+        <li>Enter the amount of surplus food generated daily (in kgs).</li>
+        <li>1 kg food can be distributed among 3-4 people approximately.</li>
+    </ul>
+    <h4 style="color: rgba(73, 117, 6, 0.8);"><i class="fa-solid fa-handshake"></i>&nbsp;Why do we need restaurants?</h4>
+    <p>
+        Food waste is a major issue that contributes to environmental degradation and global hunger. The restaurant industry is a significant contributor to food waste, with millions of tons of food being discarded every year. Meanwhile, many individuals and families are still struggling with food insecurity. To bridge this gap and reduce food waste, restaurants should consider donating their surplus food to non-governmental organizations (NGOs) that can distribute it to those in need.<br><br>
+        
+        There are numerous benefits to donating surplus restaurant food. Firstly, it reduces the amount of food waste, which can have a positive impact on the environment. Additionally, food donation can help to alleviate hunger in local communities. By donating surplus food to NGOs, restaurants can help to ensure that edible food is not discarded while also contributing to food security efforts.<br><br>
+        
+        Despite the benefits of food donation, there are challenges to implementing a donation program in restaurants. These challenges include ensuring food safety, legal liability, and logistics. However, these obstacles can be overcome with careful planning and the development of partnerships with local NGOs and other stakeholders.</p>
+    </div>
+    <div class="content-section">
+        <form action="/addrestraunts/" method="post">
+            {% csrf_token %}
+            <fieldset class="form-group">
+            <div class="Text-heading">Join the community, register your Restaurant</div>             
+            <div class="mb-3">
+                <label class="form-label">Restaurant Name</label>
+                <input type="text" class="form-control" name="r_name">
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Location</label>
+                <input type="text" class="form-control" name="r_location" placeholder="eg : 100+, 1000+ etc">
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Contact</label>
+                <input type="text" class="form-control" name="r_contact" >
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Approximate amount of food that can be donated (in kgs)</label>
+                <input type="text" class="form-control" name="average_food" >
+            </div>
+            </fieldset>
+              <button type="submit" class="btn btn-success">Make your Restaurant live on map!</button>
+            </form>
+    </div>   
+</div>
+{% endblock %}

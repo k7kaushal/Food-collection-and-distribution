@@ -1,0 +1,75 @@
+{% extends 'addresses/base.html' %}
+{% load static %}
+{% block content %}
+{% include 'addresses/messages.html' %}
+<div>
+    <div class="container">
+        <div class="Text-heading">
+            Nearby NGO
+        </div>
+        <br>
+        <div>
+        <div class="row">
+            <div class="col-md-8 col-12 ">
+              <div 
+                style="border: 2px solid gold; background-color:rgba(163, 194, 117, 0.2); border-radius: 25px; padding: 20px; margin-bottom: 20px;"
+              >
+                <h3 style="color: rgba(73, 117, 6, 0.8); text-align: center;">We make sure your donations reach the needy</h3><br>
+                <h4 style="color: rgba(73, 117, 6, 0.8);"><i class="fa-solid fa-lock"></i>&nbsp;Tips to verify NGOs yourself :</h4>
+                <ul>
+                  <li>Check NGOs online presence for their recent activities.</li>
+                  <li>Look up their annual reports on website.</li>
+                  <li>Connect directly via social media/ contact numbers.</li>
+                </ul>
+              </div>
+                <table class="table table-striped" style="text-align: center; border: 1px solid;"> 
+                    <thead>
+                      <tr>
+                        <th scope="col">Name</th>
+                        <th scope="col">Service Domain</th>
+                        <th scope="col">Location</th>
+                        <th scope="col">Contact</th>
+                        <th scope="col">Site</th>
+                        <th scope="col">Accounts</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                    {% for NGO in NGOS %}
+                      <tr>
+                        <td>{{ NGO.ngo_name}}</td>
+                        <td>{{ NGO.ngo_type}}</td>
+                        <td>{{ NGO.location}}</td>
+                        <td>{{ NGO.Contact}}</td>
+                        <td><a href="{{ NGO.website }}"><button type="button" class="btn btn-dark">Website &nbsp;<i class="fa-solid fa-globe"></i></button></a>
+                        <td><a href="{{ NGO.social }}"><button type="button" class="btn btn-dark">Social &nbsp;<i class="fa-solid fa-users"></i></button></a>
+                        </td>
+                      </tr>
+                    {% endfor %}  
+                    </tbody>
+                  </table>
+                </div>
+            
+            <div class="col-12 col-md-4">
+                <div id='map1' style='width: 100%; height: 500px;'></div>
+            </div>
+        </div>
+    </div>
+    </div>
+    <script>
+    mapboxgl.accessToken = '{{ access_token }}';
+    const map = new mapboxgl.Map({
+    container: 'map1', // container ID
+    style: 'mapbox://styles/mapbox/streets-v12', // style URL
+    center: [73.8560625, 18.4051604], // starting position [lng, lat]
+    zoom: 9, // starting zoom
+    });
+    {% for NGO in NGOS %}
+        // Create a new marker.
+        var marker = new mapboxgl.Marker({ "color": "#194424" })
+            .setLngLat([{{NGO.ngolong}}, {{NGO.ngolat}}])
+            .setPopup(new mapboxgl.Popup().setHTML("<h3>{{NGO.location}}</h3>"))
+            .addTo(map);
+    {% endfor %}
+    </script>
+</div>
+{% endblock %}
