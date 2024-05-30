@@ -1,0 +1,62 @@
+{% extends 'addresses/base.html' %}
+{% load static %}
+{% block content %}
+{% include 'addresses/messages.html' %}
+<div>    
+    <div id='map' style='width: 100%; height: 500px;'></div>
+    <br>
+    <div class="container">
+        <div style="text-align: center;">
+            <span style="background-color: #b40219;" class="dot"></span>
+            <span><b>Your refernece location &nbsp;</b></span>
+            <span style="background-color: #800080;" class="dot"></span>
+            <span><b>Current Event locations &nbsp;</b></span>
+            <span style="background-color: #194424;" class="dot"></span>
+            <span><b>Nearby NGO locations &nbsp;</b></span>
+        </div><br>
+        <div class = "Text-heading">Mark a location on the map for reference</div><br>
+        <form method="post" style="text-align: center;">
+            {% csrf_token  %}
+            <fieldset class="form-group" >
+                    <label class="form-label"><h4>Address &nbsp;</h4></label>
+                    <input style="width: 40%;" type="text" class="" name="address" >
+            </fieldset>
+                  <button type="submit" class="btn btn-success">Mark</button><br><br>
+            <!-- {{ form }}
+            <input type = "submit" value = "submit address" /> -->
+        </form>
+    </div>
+    
+</div>
+    <script>
+    mapboxgl.accessToken = '{{ access_token }}';
+    const map = new mapboxgl.Map({
+    container: 'map', // container ID
+    style: 'mapbox://styles/mapbox/streets-v12', // style URL
+    center: [73.8560625, 18.4051604], // starting position [lng, lat]
+    zoom: 9, // starting zoom
+    });
+    {% for address in addresses %}
+        // Create a new marker.
+        var marker = new mapboxgl.Marker({ "color": "#b40219" })
+            .setLngLat([{{address.long}}, {{address.lat}}])
+            .setPopup(new mapboxgl.Popup().setHTML("<h3>{{address.address}}</h3>"))
+            .addTo(map);
+    {% endfor %}
+    {% for NGO in NGOS %}
+        // Create a new marker.
+        var marker = new mapboxgl.Marker({ "color": "#194424" })
+            .setLngLat([{{NGO.ngolong}}, {{NGO.ngolat}}])
+            .setPopup(new mapboxgl.Popup().setHTML("<h3>{{NGO.location}}</h3>"))
+            .addTo(map);
+    {% endfor %}
+    {% for event in Events %}
+        // Create a new marker.
+        var marker = new mapboxgl.Marker({ "color": "#800080" })
+            .setLngLat([{{event.ngolong}}, {{event.ngolat}}])
+            .setPopup(new mapboxgl.Popup().setHTML("<h3>{{NGO.location}}</h3>"))
+            .addTo(map);
+    {% endfor %}
+    </script>
+</div>
+{% endblock %}
