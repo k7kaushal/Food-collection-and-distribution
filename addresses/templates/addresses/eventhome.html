@@ -1,0 +1,111 @@
+{% extends 'addresses/base.html' %}
+{% load static %}
+{% block content %}
+{% include 'addresses/messages.html' %}
+<div>
+    <div class="container" style="margin-top: 30px;">
+        
+        <div>
+          <div class="container">
+            <div 
+            style="border: 2px solid gold; background-color:rgba(163, 194, 117, 0.2); border-radius: 25px; padding: 20px; margin-bottom: 20px; margin-top: 20px;"
+            >
+            <h4 style="color:rgba(73, 117, 6, 0.8);"><i class="fa-solid fa-handshake"></i>&nbsp;Why do we need events?</h4>
+            <p>
+              Public events such as concerts, festivals, and sporting events generate large amounts of food waste due to the high volume of attendees. This food waste contributes to environmental degradation and exacerbates the issue of global hunger. To address this problem, event organizers should consider donating surplus food to non-governmental organizations (NGOs) that can distribute it to those in need.<br><br>
+                
+                There are several benefits to donating surplus food from public events. Firstly, it can reduce the amount of food waste generated and minimize the environmental impact of the event. Secondly, it can help to alleviate hunger in local communities and provide nutritious food to those who need it. Additionally, food donation can demonstrate the event's commitment to social responsibility and sustainable practices.<br><br>
+                
+                Despite the benefits of food donation, there are challenges to implementing a donation program at public events. These challenges include ensuring food safety, legal liability, and logistics. However, these obstacles can be overcome by developing partnerships with local NGOs and other stakeholders, as well as careful planning and coordination.</p>
+            </div>
+        <div class="row">
+            
+            <div class="col-12 col-md-8">
+                <div class="Text-heading">
+                    Your Events
+                </div>
+                <br>
+                {% if MySize == 0 %}
+                <p>You have not hosted any events yet</p>
+                {% else %}
+                <table class="table table-striped" style="text-align: center;  border: 1px solid;"> 
+                    <thead>
+                      <tr>
+                        <th scope="col">Name</th>
+                        <th scope="col">Attendees</th>
+                        <th scope="col">Location</th>
+                        <th scope="col">Contact</th>
+                        <th scope="col">Dated</th>
+                        <th scope="col">Delete</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                    {% for Event in My %}
+                      <tr>
+                        <td>{{ Event.event_name}}</td>
+                        <td>{{ Event.event_attendants}}</td>
+                        <td>{{ Event.location}}</td>
+                        <td>{{ Event.Contact}}</td>
+                        <td>{{ Event.date_posted}}</td>
+                        <td><a href="{% url 'deleteevent' Event.event_name %}"><button type="button" class="btn btn-dark"><i class="fa-solid fa-trash"></i>&nbsp; Delete</button></a>
+
+                        </td>
+                      </tr>
+                    {% endfor %}  
+                    </tbody>
+                  </table>
+                  {% endif %}
+                  <br>
+                <div class="Text-heading">
+                    Nearby Events
+                </div><br>
+                <table class="table table-striped" style="text-align: center; border: 1px solid;"> 
+                    <thead>
+                      <tr>
+                        <th scope="col">Name</th>
+                        <th scope="col">Attendees</th>
+                        <th scope="col">Location</th>
+                        <th scope="col">Contact</th>
+                        <th scope="col">Dated</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                    {% for Event in Events %}
+                      <tr>
+                        <td>{{ Event.event_name}}</td>
+                        <td>{{ Event.event_attendants}}</td>
+                        <td>{{ Event.location}}</td>
+                        <td>{{ Event.Contact}}</td>
+                        <td>{{ Event.date_posted}}</td>
+                        </td>
+                      </tr>
+                    {% endfor %}  
+                    </tbody>
+                  </table>
+                  <br>
+                </div>
+            
+            <div class="col-12 col-md-4">
+                <div id='map1' style='width: 100%; height: 500px;'></div>
+            </div>
+        </div>
+    </div>
+    </div>
+    <script>
+    mapboxgl.accessToken = '{{ access_token }}';
+    const map = new mapboxgl.Map({
+    container: 'map1', // container ID
+    style: 'mapbox://styles/mapbox/streets-v12', // style URL
+    center: [73.8560625, 18.4051604], // starting position [lng, lat]
+    zoom: 9, // starting zoom
+    });
+    {% for event in Events %}
+        // Create a new marker.
+        var marker = new mapboxgl.Marker({ "color": "#b40219" })
+            .setLngLat([{{event.ngolong}}, {{event.ngolat}}])
+            .setPopup(new mapboxgl.Popup().setHTML("<h3>{{NGO.location}}</h3>"))
+            .addTo(map);
+    {% endfor %}
+    </script>
+</div>
+{% endblock %}

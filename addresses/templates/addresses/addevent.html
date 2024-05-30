@@ -1,0 +1,55 @@
+{% extends 'addresses/base.html' %}
+{% load static %}
+{% block content %}
+{% include 'addresses/messages.html' %}
+<div class="container">
+    <div class="container">
+        <div 
+        style="border: 2px solid gold; background-color:rgba(163, 194, 117, 0.2); border-radius: 25px; padding: 20px; margin-bottom: 20px; margin-top: 20px;"
+        >
+        <h3 style="color: rgba(73, 117, 6, 0.8); text-align: center;">Hosting an event?</h3><br>
+        <h4 style="color: rgba(73, 117, 6, 0.8);"><i class="fa-solid fa-handshake"></i>&nbsp;Consider making your event visible to nearby NGOs for efficient management of surplus food</h4>
+        <ul>
+            <li>Fill in restaurant details.</li>
+            <li>Enter the amount of surplus food generated daily (in kgs).</li>
+            <li>1 kg food can be distributed among 3-4 people approximately.</li>
+        </ul>
+        <h4 style="color: rgba(73, 117, 6, 0.8);"><i class="fa-solid fa-handshake"></i>&nbsp;Why do we need events?</h4>
+            <p>
+              Public events such as concerts, festivals, and sporting events generate large amounts of food waste due to the high volume of attendees. This food waste contributes to environmental degradation and exacerbates the issue of global hunger. To address this problem, event organizers should consider donating surplus food to non-governmental organizations (NGOs) that can distribute it to those in need.<br><br>
+                
+                There are several benefits to donating surplus food from public events. Firstly, it can reduce the amount of food waste generated and minimize the environmental impact of the event. Secondly, it can help to alleviate hunger in local communities and provide nutritious food to those who need it. Additionally, food donation can demonstrate the event's commitment to social responsibility and sustainable practices.<br><br>
+                
+                Despite the benefits of food donation, there are challenges to implementing a donation program at public events. These challenges include ensuring food safety, legal liability, and logistics. However, these obstacles can be overcome by developing partnerships with local NGOs and other stakeholders, as well as careful planning and coordination.</p>
+        </div>
+    <div class="content-section">
+        <form action="/addevent/" method="post">
+            {% csrf_token %}
+            <fieldset class="form-group">
+            <div class="Text-heading">Register your event, share your celebration!</div>             
+            <div class="mb-3">
+                <label class="form-label">Event Name</label>
+                <input type="text" class="form-control" name="event_name">
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Number of attendees</label>
+                <input type="text" class="form-control" name="event_attendants" placeholder="eg : 100+, 1000+ etc">
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Location</label>
+                <input type="text" class="form-control" name="location" >
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Contact</label>
+                <input type="text" class="form-control" name="contact" >
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Are you the Event Manager?  &nbsp;</label>
+                <input type="checkbox" class="" name="event_manager" >
+            </div>
+            </fieldset>
+              <button type="submit" class="btn btn-success">Make your Event live on map!</button>
+            </form>
+    </div>   
+</div>
+{% endblock %}
